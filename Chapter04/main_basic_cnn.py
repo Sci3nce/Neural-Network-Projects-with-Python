@@ -4,7 +4,7 @@ import warnings
 warnings.filterwarnings("ignore")
 from utils import train_test_split
 
-src = 'Dataset/PetImages/'
+src =  os.getcwd() + '\\Chapter04\\Dataset\\PetImages\\'
 
 # Check if the dataset has been downloaded. If not, direct user to download the dataset first
 if not os.path.isdir(src):
@@ -22,7 +22,7 @@ if not os.path.isdir(src+'train/'):
 from keras.models import Sequential
 from keras.layers import Conv2D, MaxPooling2D
 from keras.layers import Dropout, Flatten, Dense
-from keras.preprocessing.image import ImageDataGenerator
+from tensorflow.keras.preprocessing.image import ImageDataGenerator
 
 # Define hyperparameters
 FILTER_SIZE = 3
@@ -57,13 +57,9 @@ test_set = testing_data_generator.flow_from_directory(src+'Test/',
                                              batch_size = BATCH_SIZE,
                                              class_mode = 'binary')
 
-model.fit_generator(training_set, steps_per_epoch = STEPS_PER_EPOCH, epochs = EPOCHS, verbose=1)
+model.fit(training_set, steps_per_epoch = STEPS_PER_EPOCH, epochs = EPOCHS, verbose=1)
 
-score = model.evaluate_generator(test_set, steps=100)
+score = model.evaluate(test_set, steps=100)
 
 for idx, metric in enumerate(model.metrics_names):
     print("{}: {}".format(metric, score[idx]))
-
-
-
-

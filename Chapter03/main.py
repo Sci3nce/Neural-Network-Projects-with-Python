@@ -6,13 +6,16 @@ import numpy as np
 from sklearn.preprocessing import scale
 from sklearn.model_selection import train_test_split
 from keras.models import Sequential
-from keras.layers import Dense
+from keras.layers import Dense, Input
 from keras.layers import BatchNormalization
 from sklearn.metrics import mean_squared_error
+import os
+
+taxi_path = os.getcwd() + "\\Chapter03\\NYC_taxi.csv"
 
 try:
     print("Reading in the dataset. This will take some time..")
-    df = pd.read_csv('NYC_taxi.csv', parse_dates=['pickup_datetime'], nrows=500000)
+    df = pd.read_csv(taxi_path, parse_dates=["pickup_datetime"], nrows=500000)
 except:
     print("""
       Dataset not found in your computer.
@@ -24,6 +27,8 @@ except:
 
 # Perform preprocessing and feature engineering
 df = preprocess(df)
+pd.set_option("display.max_columns", None)
+print(df.head(5))
 df = feature_engineer(df)
 
 # Scale the features
@@ -43,7 +48,8 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
 # Build neural network in Keras
 model=Sequential()
-model.add(Dense(128, activation= 'relu', input_dim=X_train.shape[1]))
+model.add(Input(shape=(X_train.shape[1],)))
+model.add(Dense(128, activation= 'relu'))
 # model.add(BatchNormalization())
 model.add(Dense(64, activation= 'relu'))
 model.add(Dense(32, activation= 'relu'))
@@ -80,4 +86,3 @@ def predict_random(df_prescaled, X_test, model):
     print("RMSE: ${:0.2f}".format(rmse))
 
 predict_random(df_prescaled, X_test, model)
-

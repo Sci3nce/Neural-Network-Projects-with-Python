@@ -2,11 +2,13 @@
 Main code for training a Siamese neural network for face recognition
 '''
 import utils
+import os
 import numpy as np
 from keras.layers import Input, Lambda
 from keras.models import Model
 
-faces_dir = 'att_faces/'
+chapter_path = os.getcwd() + "\\Chapter07\\"
+faces_dir = chapter_path+'\\att_faces\\'
 
 # Import Training and Testing Data
 (X_train, Y_train), (X_test, Y_test) = utils.get_data(faces_dir)
