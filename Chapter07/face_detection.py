@@ -1,7 +1,8 @@
 import cv2
 import os 
 
-face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
+chapter_path = os.getcwd() + "\\Chapter07\\"
+face_cascade = cv2.CascadeClassifier(chapter_path+'haarcascade_frontalface_default.xml')
 
 def detect_faces(img, draw_box=True):
 	# convert image to grayscale
@@ -24,10 +25,9 @@ def detect_faces(img, draw_box=True):
 	return img, face_box, face_coords
 
 if __name__ == "__main__":
-	files = os.listdir('sample_faces')
-	images = [file for file in files if 'jpg' in file]
-	for image in images:
-		img = cv2.imread('sample_faces/' + image)
-		detected_faces, _, _ = detect_faces(img)
-		cv2.imwrite('sample_faces/detected_faces/' + image, detected_faces)
-
+    files = os.listdir(chapter_path + "sample_faces")
+    images = [file for file in files if "jpg" in file]
+    for image in images:
+        img = cv2.imread(chapter_path + "sample_faces\\" + image)
+        detected_faces, _, _ = detect_faces(img)
+        cv2.imwrite(chapter_path + "sample_faces\\detected_faces\\" + image, detected_faces)

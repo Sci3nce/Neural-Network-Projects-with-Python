@@ -39,8 +39,10 @@ def train_model(Optimizer, X_train, y_train, X_val, y_val):
 RMSprop_score, RMSprop_model = train_model(Optimizer = 'RMSprop', X_train=X_train_padded, y_train=y_train, X_val=X_test_padded, y_val=y_test)
 
 # Plot accuracy per epoch
-plt.plot(range(1,11), RMSprop_score.history['acc'], label='Training Accuracy') 
-plt.plot(range(1,11), RMSprop_score.history['val_acc'], label='Validation Accuracy')
+plt.plot(range(1,11), RMSprop_score.history['accuracy'], label='Training Accuracy') 
+plt.plot(
+    range(1, 11), RMSprop_score.history["val_accuracy"], label="Validation Accuracy"
+)
 plt.axis([1, 10, 0, 1])
 plt.xlabel('Epoch')
 plt.ylabel('Accuracy')
@@ -48,8 +50,15 @@ plt.title('Train and Validation Accuracy using RMSprop Optimizer')
 plt.legend()
 plt.show()
 
+"""
+tensorflow\python\keras\engine\sequential.py:455: UserWarning: model.predict_classes() is deprecated and will be removed after 2021-01-01. Please use instead:
+* np.argmax(model.predict(x), axis=-1), if your model does multi-class classification (e.g. if it uses a softmax last-layer activation).
+* (model.predict(x) > 0.5).astype("int32"), if your model does binary classification (e.g. if it uses a sigmoid last-layer activation).
+"""
 # Plot confusion matrix
-y_test_pred = RMSprop_model.predict_classes(X_test_padded) 
+# y_test_pred = RMSprop_model.predict_classes(X_test_padded)
+y_test_pred = (RMSprop_model.predict(X_test_padded) > 0.5).astype("int32")
+
 c_matrix = confusion_matrix(y_test, y_test_pred)
 ax = sns.heatmap(c_matrix, annot=True, xticklabels=['Negative Sentiment', 'Positive Sentiment'], yticklabels=['Negative Sentiment', 'Positive Sentiment'], cbar=False, cmap='Blues', fmt='g')
 ax.set_xlabel("Prediction")

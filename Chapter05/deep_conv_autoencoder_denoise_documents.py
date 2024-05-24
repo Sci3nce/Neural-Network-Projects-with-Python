@@ -11,21 +11,21 @@ from keras.preprocessing.image import load_img, img_to_array
 
 if __name__ == '__main__':
     # Import noisy office documents dataset
-    noisy_imgs_path = 'Noisy_Documents/noisy/'
-    clean_imgs_path = 'Noisy_Documents/clean/'
+    noisy_imgs_path = os.getcwd() + "\\Chapter05\\Noisy_Documents\\noisy\\"
+    clean_imgs_path = os.getcwd() + "\\Chapter05\\Noisy_Documents\\clean\\"
 
     X_train_noisy = []
     X_train_clean = []
 
     for file in sorted(os.listdir(noisy_imgs_path)):
-      img = load_img(noisy_imgs_path+file, color_mode='grayscale', target_size=(420,540))
-      img = img_to_array(img).astype('float32')/255
-      X_train_noisy.append(img)
+        img = load_img(noisy_imgs_path+file, color_mode='grayscale', target_size=(420,540))
+        img = img_to_array(img).astype('float32')/255
+        X_train_noisy.append(img)
 
     for file in sorted(os.listdir(clean_imgs_path)):
-      img = load_img(clean_imgs_path+file, color_mode='grayscale', target_size=(420,540))
-      img = img_to_array(img).astype('float32')/255
-      X_train_clean.append(img) 
+        img = load_img(clean_imgs_path+file, color_mode='grayscale', target_size=(420,540))
+        img = img_to_array(img).astype('float32')/255
+        X_train_clean.append(img) 
 
     # convert to numpy array
     X_train_noisy = np.array(X_train_noisy) 
