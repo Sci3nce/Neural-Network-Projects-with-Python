@@ -1,11 +1,8 @@
-
-
-
 # Neural Network Projects with Python (Windows version, forked by Sci3nce)
 
 <a href="https://www.packtpub.com/big-data-and-business-intelligence/neural-network-projects-python?utm_source=github&utm_medium=repository"><img src="https://dz13w8afd47il.cloudfront.net/sites/default/files/imagecache/ppv4_main_book_cover/B10710.png" alt="Book Name" height="256px" align="right"></a>
 
-This is the code repository for [Neural Network Projects with Python](https://www.packtpub.com/big-data-and-business-intelligence/neural-network-projects-python?utm_source=github&utm_medium=repository), published by Packt.
+This is the code repository for [Neural Network Projects with Python](https://www.packtpub.com/big-data-and-business-intelligence/neural-network-projects-python?utm_source=github&utm_medium=repository), published by Packt. This repository is forked by Sci3nce for the purpose of studying and working through the projects in the book. 
 
 **The ultimate guide to using Python to explore the true power of neural networks through six projects**
 
